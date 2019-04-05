@@ -431,6 +431,20 @@ const char *mg_get_header (const struct mg_connection *conn, const char *name)
     return get_header(&conn->request_info, name);
 }
 
+static void log_all_headers (const struct mg_connection *conn)
+{
+    const struct mg_request_info *ri = &conn->request_info;
+
+    int i;
+
+    EST_LOG_INFO("Logging all headers:");
+    for (i = 0; i < ri->num_headers; i++) {
+        EST_LOG_INFO("%s: %s", ri->http_headers[i].name, ri->http_headers[i].value);
+    }
+    EST_LOG_INFO("Done logging headers.");
+}
+
+
 // HTTP 1.1 assumes keep alive if "Connection:" header is not set
 // This function must tolerate situations when connection info is not
 // set up, for example if request parsing failed.
@@ -1396,6 +1410,8 @@ static void log_access (const struct mg_connection *conn)
                  conn->status_code, conn->num_bytes_sent);
     log_header(conn, "Referer");
     log_header(conn, "User-Agent");
+	
+    log_all_headers(conn);
 }
 
 // Return OpenSSL error message
