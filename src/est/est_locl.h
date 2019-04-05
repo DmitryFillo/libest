@@ -207,6 +207,7 @@ struct est_ctx {
     char realm[MAX_REALM+1];
     SSL_CTX         *ssl_ctx;
     int              enable_crl;
+    int		     enable_tls10;
 
     char             token_error[MAX_TOKEN_ERROR+1];
     char             token_error_desc[MAX_TOKEN_ERROR_DESC+1];
