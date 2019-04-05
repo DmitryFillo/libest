@@ -48,8 +48,8 @@ EST_OPENSSL_CASUBJ="/CN=estExampleCA"
 
 EST_OPENSSLCMD_CAECPARAMSFILE=$EST_OPENSSL_CADIR/prime256v1.pem
 # if you want to use EC certificates set the ..._NEWKEY_PARAM like this:
-EST_OPENSSLCMD_CANEWKEY_PARAM="-newkey ec:$EST_OPENSSLCMD_CAECPARAMSFILE"
-#EST_OPENSSLCMD_CANEWKEY_PARAM=" "
+#EST_OPENSSLCMD_CANEWKEY_PARAM="-newkey ec:$EST_OPENSSLCMD_CAECPARAMSFILE"
+EST_OPENSSLCMD_CANEWKEY_PARAM=" "
 
 # to enable verbose debugging of curl exchanges set this
 # remember that "set -u" means we'll always need something like " " set
