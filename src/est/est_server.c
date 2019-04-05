@@ -2356,9 +2356,18 @@ EST_ERROR est_server_init_csrattrs (EST_CTX *ctx, char *csrattrs, int csrattrs_l
  */
 EST_ERROR est_server_enable_tls10 (EST_CTX *ctx)
 {
+	/*
 	EST_LOG_ERR("TLS 1.0 is a violation of RFC7030 and therefore not supported");
         return (EST_ERR_BAD_MODE);
-
+	*/
+	
+	if (!ctx) {
+		EST_LOG_ERR("Null context");
+		return (EST_ERR_NO_CTX);
+	}
+	
+	ctx->enable_tls10 = 1;
+	return (EST_ERR_NONE);
 }
 
 /*! @brief est_server_enforce_csrattrs() is used by an application to 
