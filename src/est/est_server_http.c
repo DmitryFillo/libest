@@ -1459,12 +1459,19 @@ static int set_ssl_option (struct mg_context *ctx)
      * secrecty and comply with the EST draft.
      */
 
-    SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv2 |
-                        SSL_OP_NO_SSLv3 |
-                        SSL_OP_NO_TLSv1 |
-                        SSL_OP_SINGLE_ECDH_USE |
-                        SSL_OP_NO_TICKET);
-
+	if (ectx->enable_tls10) {
+		EST_LOG_INFO("Enabling TLS 1.0... (RFC VIOLATION)");
+		SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv2 |
+				SSL_OP_NO_SSLv3 |
+				SSL_OP_SINGLE_ECDH_USE |
+				SSL_OP_NO_TICKET);
+	} else {
+	    	SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv2 |
+				SSL_OP_NO_SSLv3 |
+				SSL_OP_NO_TLSv1 |
+				SSL_OP_SINGLE_ECDH_USE |
+				SSL_OP_NO_TICKET);
+	}
 
     /* 
      * Set the ECDH single use parms.  Use the configured
