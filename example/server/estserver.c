@@ -1187,6 +1187,9 @@ int main (int argc, char **argv)
     }
     est_set_ex_data(ectx, &test_app_data);
 
+    /* enable TLS 1.0 (RFC volation!) */
+    est_server_enable_tls10(ectx);
+
     if (enforce_csr) {
         est_server_enforce_csrattr(ectx);
     }
